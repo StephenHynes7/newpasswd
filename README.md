@@ -1,0 +1,4 @@
+newpasswd
+=========
+
+Random password generator
