@@ -1,0 +1,31 @@
+#!/usr/bin/env python
+
+import string
+import random
+import gzip
+from Crypto.Random import random
+
+FILENAME='/usr/share/ispell/american.med+.mwl.gz'
+
+
+def ok_word( word):
+	letter = not any((c not in string.ascii_lowercase) for c in word)
+	size = 4 < len( word) < 10
+	return letter and size
+
+def clean( word):
+	return word[:word.find('/')]
+
+
+with gzip.open( FILENAME, 'rb') as f:
+	all_words = f.readlines()
+
+clean_dict = [clean( word) for word in all_words]
+dictionary = [word for word in clean_dict if ok_word( word)]
+
+#print 'Dictionary length: ', len(dictionary)
+
+pwd_words = [random.choice( dictionary) for _ in range(0,4)]
+print '.'.join( pwd_words)
+
+
