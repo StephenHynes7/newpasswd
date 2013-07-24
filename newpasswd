@@ -14,8 +14,8 @@ FILENAMES=[
 
 def ok_word( word):
 	letter = not any((c not in string.ascii_lowercase) for c in word)
-	size = 4 < len( word) < 10
-	nono = word.find( 'fuck') != -1
+	size = 3 < len( word) < 10
+	nono = word.find( 'fuck') != -1 or word in ['cock']
 	return letter and size and not nono
 
 def clean( word):
