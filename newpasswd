@@ -6,10 +6,8 @@ import gzip
 import os.path
 from Crypto.Random import random
 
-FILENAMES=[
-	'/usr/share/ispell/american.mwl.gz',
-	'/usr/share/ispell/british.mwl.gz',
-	]
+WORDS='/usr/share/dict/words',
+
 
 
 def ok_word( word):
@@ -21,9 +19,9 @@ def ok_word( word):
 def clean( word):
 	return word[:word.find('/')]
 
-for filename in [x for x in FILENAMES if os.path.isfile( x)]:
-	with gzip.open( filename, 'rb') as f:
-		all_words = f.readlines()
+
+f = open('/usr/share/dict/words', 'r')
+all_words = f.readlines()
 
 clean_dict = [clean( word) for word in all_words]
 dictionary = [word for word in clean_dict if ok_word( word)]
